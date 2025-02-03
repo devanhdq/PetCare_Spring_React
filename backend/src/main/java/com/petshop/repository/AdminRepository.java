@@ -1,4 +1,7 @@
 package com.petshop.repository;
 
-public interface AdminRepository {
+import com.petshop.model.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 }

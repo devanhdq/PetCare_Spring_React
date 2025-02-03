@@ -32,4 +32,8 @@ public class User {
     private String userType;
 
     private boolean isEnable;
+
+    @Transient
+    private String specialization;
+
 }
