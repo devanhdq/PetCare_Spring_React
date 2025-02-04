@@ -1,10 +1,9 @@
 package com.petshop.factory;
 
-import com.petshop.model.User;
 import com.petshop.model.Veterinarian;
 import com.petshop.repository.VeterinarianRepository;
-import com.petshop.request.RegistrationRequest;
-import com.petshop.service.user.UserAttributeMapper;
+import com.petshop.payload.request.RegistrationRequest;
+import com.petshop.service.user.UserAttributesMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class VeterinarianFactory {
     private final VeterinarianRepository veterinarianRepository;
-    private final UserAttributeMapper userAttributeMapper;
+    private final UserAttributesMapper userAttributesMapper;
 
     public Veterinarian createVeterinarian(RegistrationRequest request) {
         Veterinarian veterinarian = new Veterinarian();
-        userAttributeMapper.setCommonAttributes(request, veterinarian);
+        userAttributesMapper.setCommonAttributes(request, veterinarian);
         veterinarian.setSpecialization(request.getSpecialization());
         return veterinarianRepository.save(veterinarian);
     }

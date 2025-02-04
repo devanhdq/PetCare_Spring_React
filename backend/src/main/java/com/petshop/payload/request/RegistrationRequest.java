@@ -1,9 +1,10 @@
-package com.petshop.request;
+package com.petshop.payload.request;
 
 import lombok.Data;
 
 @Data
 public class RegistrationRequest {
+
     private Long id;
 
     private String firstName;

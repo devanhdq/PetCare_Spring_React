@@ -3,27 +3,27 @@ package com.petshop.factory;
 import com.petshop.exception.UserAlreadyExistsException;
 import com.petshop.model.User;
 import com.petshop.repository.UserRepository;
-import com.petshop.request.RegistrationRequest;
+import com.petshop.payload.request.RegistrationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class SimpleUserFactory implements UserFactory {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private final VeterinarianFactory veterinarianFactory;
     private final AdminFactory adminFactory;
     private final PatientFactory patientFactory;
 
     @Override
-    public User createUser(RegistrationRequest registrationRequest) {
-        if (userRepository.existsByEmail(registrationRequest.getEmail())) {
-            throw new UserAlreadyExistsException("Oops! " + registrationRequest.getEmail() + " already exists.");
+    public User createUser(RegistrationRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new UserAlreadyExistsException("Oops! " + request.getEmail() + " already exists.");
         }
-        return switch (registrationRequest.getUserType()) {
-            case "VET" -> veterinarianFactory.createVeterinarian(registrationRequest);
-            case "ADMIN" -> adminFactory.createAdmin(registrationRequest);
-            case "PATIENT" -> patientFactory.createPatient(registrationRequest);
+        return switch (request.getUserType()) {
+            case "VET" -> veterinarianFactory.createVeterinarian(request);
+            case "ADMIN" -> adminFactory.createAdmin(request);
+            case "PATIENT" -> patientFactory.createPatient(request);
             default -> null;
         };
     }
