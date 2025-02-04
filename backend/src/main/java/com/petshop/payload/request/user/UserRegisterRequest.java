@@ -1,9 +1,9 @@
-package com.petshop.payload.request;
+package com.petshop.payload.request.user;
 
 import lombok.Data;
 
 @Data
-public class RegistrationRequest {
+public class UserRegisterRequest {
 
     private Long id;
 

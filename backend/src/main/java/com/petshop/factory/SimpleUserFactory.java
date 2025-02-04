@@ -3,7 +3,7 @@ package com.petshop.factory;
 import com.petshop.exception.UserAlreadyExistsException;
 import com.petshop.model.User;
 import com.petshop.repository.UserRepository;
-import com.petshop.payload.request.RegistrationRequest;
+import com.petshop.payload.request.user.UserRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class SimpleUserFactory implements UserFactory {
     private final PatientFactory patientFactory;
 
     @Override
-    public User createUser(RegistrationRequest request) {
+    public User createUser(UserRegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new UserAlreadyExistsException("Oops! " + request.getEmail() + " already exists.");
         }

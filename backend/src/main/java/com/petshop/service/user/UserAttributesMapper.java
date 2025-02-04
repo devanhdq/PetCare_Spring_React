@@ -1,13 +1,13 @@
 package com.petshop.service.user;
 
 import com.petshop.model.User;
-import com.petshop.payload.request.RegistrationRequest;
+import com.petshop.payload.request.user.UserRegisterRequest;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserAttributesMapper {
 
-    public void setCommonAttributes(RegistrationRequest source, User target) {
+    public void setCommonAttributes(UserRegisterRequest source, User target) {
         target.setFirstName(source.getFirstName());
         target.setLastName(source.getLastName());
         target.setGender(source.getGender());

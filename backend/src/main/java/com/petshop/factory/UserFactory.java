@@ -1,8 +1,8 @@
 package com.petshop.factory;
 
 import com.petshop.model.User;
-import com.petshop.payload.request.RegistrationRequest;
+import com.petshop.payload.request.user.UserRegisterRequest;
 
 public interface UserFactory {
-    public User createUser(RegistrationRequest request);
+    public User createUser(UserRegisterRequest request);
 }
