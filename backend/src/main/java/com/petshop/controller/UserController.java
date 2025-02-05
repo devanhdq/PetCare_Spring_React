@@ -8,7 +8,7 @@ import com.petshop.model.User;
 import com.petshop.payload.request.user.UserRegisterRequest;
 import com.petshop.payload.request.user.UserUpdateRequest;
 import com.petshop.payload.response.ApiResponse;
-import com.petshop.service.user.impl.IUserService;
+import com.petshop.service.user.UserService;
 import com.petshop.utils.FeedBackMessage;
 import com.petshop.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequestMapping(UrlMapping.USERS)
 @RestController
 public class UserController {
-    private final IUserService userService;
+    private final UserService userService;
     private final EntityConverter<User, UserDTO> entityConverter;
 
 

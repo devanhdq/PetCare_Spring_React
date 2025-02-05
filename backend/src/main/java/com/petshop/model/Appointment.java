@@ -1,6 +1,7 @@
 package com.petshop.model;
 
 
+import com.petshop.enums.AppointmentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,13 +25,16 @@ public class Appointment {
 
     private String reason;
 
-    private LocalDate date;
+    private LocalDate appointmentDate;
 
-    private LocalTime time;
+    private LocalTime appointmentTime;
 
     private String appointmentNo;
 
     private LocalDate creatAt;
+
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status;
 
     @Column(name = "sender")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -56,7 +60,7 @@ public class Appointment {
         recipient.getAppointments().add(this);
     }
 
-    public void setAppointmentNo(String appointmentNo) {
+    public void setAppointmentNo() {
         this.appointmentNo = String.format("%010d", Math.abs(new Random().nextLong()) % 1_000_000_0000L);
 
     }
