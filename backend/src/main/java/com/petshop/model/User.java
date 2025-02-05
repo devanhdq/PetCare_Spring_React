@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -35,5 +37,8 @@ public class User {
 
     @Transient
     private String specialization;
+
+    @Transient
+    List<Appointment> appointments;
 
 }
