@@ -70,6 +70,7 @@ public class UserController {
             return ResponseEntity.ok().body(new ApiResponse("Update user", FeedBackMessage.SUCCESS, theUser));
         } catch (ResourceNotFoundException error) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("Update user", error.getMessage(), null));
+
         } catch (Exception error) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Update user", error.getMessage(), null));
         }
