@@ -3,6 +3,7 @@ package com.petshop.controller;
 import com.petshop.exception.ResourceNotFoundException;
 import com.petshop.model.Appointment;
 import com.petshop.payload.request.appointment.AppointmentUpdateRequest;
+import com.petshop.payload.request.appointment.BookAppointmentRequest;
 import com.petshop.payload.response.ApiResponse;
 import com.petshop.service.appointment.AppointmentService;
 import com.petshop.utils.FeedBackMessage;
@@ -23,7 +24,7 @@ public class AppointmentController {
 
     @PostMapping(UrlMapping.BOOK_APPOINTMENTS)
     public ResponseEntity<ApiResponse> bookAppointment(
-            @RequestBody Appointment request,
+            @RequestBody BookAppointmentRequest request,
             @RequestParam Long senderId,
             @RequestParam Long recipientId) {
         try {

@@ -1,13 +1,14 @@
-package com.petshop.service.appointment.impl;
+package com.petshop.service.appointment;
 
 import com.petshop.model.Appointment;
 import com.petshop.payload.request.appointment.AppointmentUpdateRequest;
+import com.petshop.payload.request.appointment.BookAppointmentRequest;
 
 import java.util.List;
 
 public interface IAppointmentService {
 
-    Appointment createAppointment(Appointment appointment, Long sender, Long recipient);
+    Appointment createAppointment(BookAppointmentRequest request, Long senderId, Long recipientId);
 
     List<Appointment> getAllAppointments();
 

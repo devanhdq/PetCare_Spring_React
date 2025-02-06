@@ -1,4 +1,4 @@
-package com.petshop.service.user.impl;
+package com.petshop.service.user;
 
 import com.petshop.dto.UserDTO;
 import com.petshop.model.User;

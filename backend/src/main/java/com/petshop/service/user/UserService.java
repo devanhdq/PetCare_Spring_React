@@ -8,7 +8,6 @@ import com.petshop.model.User;
 import com.petshop.payload.request.user.UserRegisterRequest;
 import com.petshop.payload.request.user.UserUpdateRequest;
 import com.petshop.repository.UserRepository;
-import com.petshop.service.user.impl.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
