@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,7 +37,13 @@ public class User {
 
     private boolean isEnable;
 
+    @CreationTimestamp
+    private LocalDate createdAt;
+
     @Transient
     private String specialization;
+
+    @Transient
+    List<Appointment> appointments;
 
 }
