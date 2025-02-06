@@ -79,7 +79,7 @@ public class AppointmentController {
             Appointment updatedAppointment = appointmentService.updateAppointmentById(appointmentId, request);
             return ResponseEntity.ok(new ApiResponse("Update Appointment", FeedBackMessage.SUCCESS, updatedAppointment));
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(BAD_REQUEST).body(new ApiResponse("Update Appointment", e.getMessage(), null));
+            return ResponseEntity.status(NOT_ACCEPTABLE).body(new ApiResponse("Update Appointment", e.getMessage(), null));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Update Appointment", e.getMessage(), null));
         }
