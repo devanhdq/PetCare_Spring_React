@@ -46,4 +46,7 @@ public class User {
     @Transient
     List<Appointment> appointments;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Photo photo;
+
 }

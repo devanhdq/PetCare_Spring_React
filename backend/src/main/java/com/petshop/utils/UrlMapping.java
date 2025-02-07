@@ -23,11 +23,11 @@ public class UrlMapping {
 
     /*  ============================== PET API ============================*/
     public static final String PETS = API + "/pets";
-    public static final String ADD_PET = "/add";
-    public static final String GET_ALL_PETS = "/all";
+    public static final String ADD_PET = "/pet";
+    public static final String GET_ALL_PETS = "";
     public static final String GET_PET_BY_ID = "/pet/{petId}";
-    public static final String DELETE_PET_BY_ID = "/delete";
-    public static final String UPDATE_PET_BY_ID = "/update/{petId}";
+    public static final String DELETE_PET_BY_ID = "/pet/{petId}";
+    public static final String UPDATE_PET_BY_ID = "/pet/{petId}";
 
 
 }
