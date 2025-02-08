@@ -5,8 +5,8 @@ public class UrlMapping {
 
   /*  =========================== USER API ==================================*/
     public static final String USERS = API + "/users";
-    public static final String REGISTER = "/";
-    public static final String GET_ALL_USERS = "/";
+    public static final String REGISTER = "/user";
+    public static final String GET_ALL_USERS = "";
     public static final String GET_USER_BY_ID = "/user/{userId}";
     public static final String UPDATE_USER_BY_ID = "/user/{userId}";
     public static final String DELETE_USER_BY_ID = "/user/{userId}";

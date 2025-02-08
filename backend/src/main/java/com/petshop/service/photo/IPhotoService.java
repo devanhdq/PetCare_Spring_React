@@ -7,16 +7,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public interface IPhotoService {
-
     Photo savePhoto(MultipartFile file, Long userId) throws IOException, SQLException;
 
-    Photo getPhotoById(Long photoId);
+    Photo getPhotoById(Long id);
 
-    void deletePhoto(Long photoId);
+    void deletePhoto(Long id, Long userId) throws SQLException;
 
-    Photo updatePhoto(Long id, byte[] file) throws SQLException;
+    Photo updatePhoto(Long id, MultipartFile file) throws SQLException, IOException;
 
-    byte[] getPhotoImage(Long photoId) throws SQLException;
-
-
+    byte[] getImageData(Long id) throws SQLException;
 }

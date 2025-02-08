@@ -8,22 +8,17 @@ import lombok.Setter;
 
 import java.sql.Blob;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String fileType;
-
     private String fileName;
-
     @Lob
     private Blob image;
-
-
 }
