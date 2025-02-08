@@ -5,21 +5,21 @@ public class UrlMapping {
 
   /*  =========================== USER API ==================================*/
     public static final String USERS = API + "/users";
-    public static final String REGISTER = "/register";
-    public static final String UPDATE_USER_BY_ID = "/update/{userId}";
-    public static final String DELETE_USER_BY_ID = "/delete/{userId}";
+    public static final String REGISTER = "/";
+    public static final String GET_ALL_USERS = "/";
     public static final String GET_USER_BY_ID = "/user/{userId}";
-    public static final String GET_ALL_USERS = "/all";
+    public static final String UPDATE_USER_BY_ID = "/user/{userId}";
+    public static final String DELETE_USER_BY_ID = "/user/{userId}";
 
 
     /*  ============================== APPOINTMENT API ============================*/
     public static final String APPOINTMENTS = API + "/appointments";
-    public static final String BOOK_APPOINTMENTS = "/book-appointment";
-    public static final String GET_ALL_APPOINTMENTS = "/all";
+    public static final String BOOK_APPOINTMENTS = "/appointment";
+    public static final String GET_ALL_APPOINTMENTS = "/";
     public static final String GET_APPOINTMENT_BY_ID = "/appointment/{appointmentId}";
     public static final String GET_APPOINTMENT_BY_APPOINTMENT_NO = "/appointmentNo/{appointmentNo}";
-    public static final String DELETE_APPOINTMENT_BY_ID = "/appointment/delete/{appointmentId}";
-    public static final String UPDATE_APPOINTMENT_BY_ID = "/appointment/update/{appointmentId}";
+    public static final String DELETE_APPOINTMENT_BY_ID = "/appointment/{appointmentId}";
+    public static final String UPDATE_APPOINTMENT_BY_ID = "/appointment/{appointmentId}";
 
     /*  ============================== PET API ============================*/
     public static final String PETS = API + "/pets";
@@ -29,5 +29,10 @@ public class UrlMapping {
     public static final String DELETE_PET_BY_ID = "/pet/{petId}";
     public static final String UPDATE_PET_BY_ID = "/pet/{petId}";
 
-
+  /*  ============================== PHOTO API ============================*/
+  public static final String PHOTO = API + "/photos";
+  public static final String UPLOAD_PHOTO = "/photo";
+  public static final String UPDATE_PHOTO = "/photo/{photoId}";
+  public static final String GET_PHOTO = "/photo/{photoId}";
+  public static final String DELETE_PHOTO = "/photo/{photoId}";
 }
