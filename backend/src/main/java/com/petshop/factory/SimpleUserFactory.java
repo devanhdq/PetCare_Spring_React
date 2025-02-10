@@ -1,6 +1,6 @@
 package com.petshop.factory;
 
-import com.petshop.exception.UserAlreadyExistsException;
+import com.petshop.exception.ResourceAlreadyExistsException;
 import com.petshop.model.User;
 import com.petshop.repository.UserRepository;
 import com.petshop.payload.request.user.UserRegisterRequest;
@@ -18,7 +18,7 @@ public class SimpleUserFactory implements UserFactory {
     @Override
     public User createUser(UserRegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new UserAlreadyExistsException("Oops! " + request.getEmail() + " already exists.");
+            throw new ResourceAlreadyExistsException("Oops! " + request.getEmail() + " already exists.");
         }
         return switch (request.getUserType()) {
             case "VET" -> veterinarianFactory.createVeterinarian(request);

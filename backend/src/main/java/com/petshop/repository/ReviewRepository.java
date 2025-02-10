@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
@@ -17,4 +18,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findAllByUserId(@Param("userId") Long userId, PageRequest pageRequest);
 
     List<Review> findByVeterinarianId(Long veterinarianId);
+
+    Optional<Review> findByVeterinarianIdAndPatientId(Long veterinarianId, Long reviewerId);
 }
