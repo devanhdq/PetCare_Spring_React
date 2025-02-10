@@ -3,7 +3,7 @@ package com.petshop.controller;
 import com.petshop.dto.EntityConverter;
 import com.petshop.dto.UserDTO;
 import com.petshop.exception.ResourceNotFoundException;
-import com.petshop.exception.UserAlreadyExistsException;
+import com.petshop.exception.ResourceAlreadyExistsException;
 import com.petshop.model.User;
 import com.petshop.payload.request.user.UserRegisterRequest;
 import com.petshop.payload.request.user.UserUpdateRequest;
@@ -33,7 +33,7 @@ public class UserController {
             User theUser = userService.register(request);
             UserDTO registeredUser = entityConverter.mapEntityToDto(theUser, UserDTO.class);
             return ResponseEntity.ok().body(new ApiResponse("Create user", FeedBackMessage.SUCCESS, registeredUser));
-        } catch (UserAlreadyExistsException error) {
+        } catch (ResourceAlreadyExistsException error) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse("Create user", error.getMessage(), null));
         } catch (Exception error) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Create user", error.getMessage(), null));

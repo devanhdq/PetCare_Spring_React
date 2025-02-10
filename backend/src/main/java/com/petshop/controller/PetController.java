@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(UrlMapping.PETS)
@@ -37,9 +36,9 @@ public class PetController {
             Pet pet = petService.getPetById(petId);
             return ResponseEntity.ok(new ApiResponse("Get pet by id!", FeedBackMessage.SUCCESS, pet));
         } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("Get pet by id!", FeedBackMessage.FAIL, null));
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("Get pet by id!", e.getMessage(), null));
         } catch (Exception e) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Get pet by id!", FeedBackMessage.FAIL, null));
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Get pet by id!", e.getMessage(), null));
         }
     }
 
@@ -69,11 +68,11 @@ public class PetController {
     public ResponseEntity<ApiResponse> deletePetById(@PathVariable Long petId) {
         try {
             petService.deletePetById(petId);
-            return ResponseEntity.ok(new ApiResponse("Delete pet by id!", FeedBackMessage.SUCCESS, null));
+            return ResponseEntity.status(NO_CONTENT).body(new ApiResponse("Delete pet by id!", FeedBackMessage.SUCCESS, null));
         } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("Delete pet by id!", FeedBackMessage.FAIL, null));
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("Delete pet by id!", e.getMessage(), null));
         } catch (Exception e) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Delete pet by id!", FeedBackMessage.FAIL, null));
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse("Delete pet by id!", e.getMessage(), null));
         }
     }
 }
