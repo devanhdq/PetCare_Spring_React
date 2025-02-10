@@ -4,6 +4,8 @@ import com.petshop.enums.AppointmentStatus;
 import com.petshop.exception.ResourceAlreadyExistsException;
 import com.petshop.exception.ResourceNotFoundException;
 import com.petshop.model.Review;
+import com.petshop.model.User;
+import com.petshop.payload.request.review.UpdateReviewRequest;
 import com.petshop.repository.AppointmentRepository;
 import com.petshop.repository.ReviewRepository;
 import com.petshop.repository.UserRepository;
@@ -27,7 +29,7 @@ public class ReviewService implements IReviewService {
     private final UserRepository userRepository;
 
     @Override
-    public void saveReview(Review review, Long reviewerId, Long veterinarianId) {
+    public Review saveReview(Review review, Long reviewerId, Long veterinarianId) {
         //1. Check if the reviewer is same is as the doctor being reviewed
         if (veterinarianId.equals(reviewerId)) {
             throw new IllegalArgumentException("Veterinarians cannot review themselves");
@@ -42,6 +44,17 @@ public class ReviewService implements IReviewService {
         if (!hadCompletedAppointment) {
             throw new IllegalStateException("Sorry, only patients who have had a completed appointment with the veterinarian can review them");
         }
+        //4.Get the reviewer, veterinarian (patient) from database
+        User reviewer = userRepository.findById(reviewerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Reviewer not found"));
+
+        User veterinarian = userRepository.findById(veterinarianId)
+                .orElseThrow(() -> new ResourceNotFoundException("Veterinarian not found"));
+        //5. Set both to the review
+        review.setPatient(reviewer);
+        review.setVeterinarian(veterinarian);
+        //6. Save the review
+        return reviewRepository.save(review);
     }
 
     @Transactional
@@ -58,20 +71,27 @@ public class ReviewService implements IReviewService {
     }
 
     @Override
-    public void updateReview(Long reviewerId, Review review) {
-        reviewRepository.findById(reviewerId)
-                .ifPresentOrElse(existingReview -> {
+    public Review updateReview(Long reviewerId, UpdateReviewRequest review) {
+        return reviewRepository.findById(reviewerId)
+                .map(existingReview -> {
                     existingReview.setStars(review.getStars());
                     existingReview.setFeedback(review.getFeedback());
-                    reviewRepository.save(existingReview);
-                }, () -> {
-                    throw new ResourceNotFoundException("Oop! Not found review!");
-                });
+                    return reviewRepository.save(existingReview);
+                }).orElseThrow(() -> new ResourceNotFoundException("Oop! Not found review!"));
     }
 
     @Override
     public Page<Review> findAllReviewsByUserId(Long userId, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         return reviewRepository.findAllByUserId(userId, pageRequest);
+    }
+
+    @Override
+    public void deleteReview(Long reviewerId) {
+        reviewRepository.findById(reviewerId)
+                .ifPresentOrElse(Review::removeRelationship, () -> {
+                    throw new ResourceNotFoundException("Not found!");
+                });
+        reviewRepository.deleteById(reviewerId);
     }
 }

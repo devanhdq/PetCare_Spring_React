@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Optional;
+
 @Entity
 @Getter
 @Setter
@@ -26,4 +28,10 @@ public class Review {
     @JoinColumn(name = "reviewer_id")
     private User patient;
 
+    public void removeRelationship() {
+        Optional.ofNullable(veterinarian)
+                .ifPresent(vet -> vet.getReviews().remove(this));
+        Optional.ofNullable(patient)
+                .ifPresent(patient -> patient.getReviews().remove(this));
+    }
 }
